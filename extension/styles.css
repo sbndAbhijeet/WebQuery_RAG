@@ -1,0 +1,10 @@
+#chaibot {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+  z-index: 9999;
+}

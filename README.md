@@ -66,3 +66,25 @@ Ask: "How to use useState in React?"
 
 Output: Explanation + Link to doc section
 
+
+
+## project structure
+
+chaidocs-helper/
+├── backend/                      # FastAPI + RAG API backend
+│   ├── app.py                    # Main FastAPI app
+│   ├── embeddings.py             # OpenAI embedding logic
+│   ├── vector_store.py           # Qdrant setup + search
+│   ├── scraper.py                # For scraping ChaiDocs
+│   ├── qdrant_config.env         # Store API key, host, etc.
+│   └── requirements.txt
+│
+├── extension/                    # Chrome extension files
+│   ├── manifest.json
+│   ├── content.js                # Injects chatbot into docs site
+│   ├── popup.html                # Optional popup UI
+│   ├── popup.js
+│   └── styles.css
+│
+├── .env                          # For FastAPI secrets
+└── README.md
