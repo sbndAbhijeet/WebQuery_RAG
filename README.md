@@ -3,6 +3,10 @@
 An AI-powered browser extension that allows users to query the ChaiDocs website contextually. It integrates a FastAPI backend, Google embeddings, OpenAI ChatBot and Qdrant vector database to return section-wise answers from documentation. Designed for developers, learners, and contributors to quickly fetch relevant content from ChaiDocs without leaving the webpage.
 
 ---
+# 📹 Demo
+   <video controls src="Screencast from 2025-06-14 00-17-11.mp4" title="Title"></video>
+
+---
 
 ## 🚀 Features
 
