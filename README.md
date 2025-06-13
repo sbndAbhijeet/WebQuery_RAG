@@ -142,6 +142,6 @@ You’ll see the assistant icon appear. Click it and start asking your queries d
 
 ## 📎 License
 
-MIT License @ Abhijeet
-
+MIT License
+With ❤️ to ChaiCode by Abhijeet
 ---
