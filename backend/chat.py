@@ -47,7 +47,7 @@ def process_query(query: str):
             "Answer": "<Give your detailed answer>",
             "Code": "<if necessary from context>",
             "Section": "<Relevant section from context>",
-            "Sub-section": "<Relevant sub-section from context>",
+            "Sub_section": "<Relevant sub-section from context>",
             "url": "<Relevant URL from context>"
         }}
 
@@ -65,7 +65,8 @@ def process_query(query: str):
     ]
     response = client.chat.completions.create(
         model="gemini-2.0-flash",
-        messages=messages
+        messages=messages,
+        response_format={'type': 'json_object'},
     )
 
     result = response.choices[0].message.content
@@ -79,7 +80,7 @@ app = FastAPI()
 #allow extension access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["chrome-extension://*"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -97,3 +98,6 @@ async def ask(query: Query):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("chat:app", host="127.0.0.1", port=8000, reload=True)
+
+
+# {"detail":[{"type":"missing","loc":["body","question"],"msg":"Field required","input":{"query":"how to use tailwind in
