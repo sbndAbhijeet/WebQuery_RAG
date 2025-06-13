@@ -1,90 +1,147 @@
-# Project 2: Website Documentation Bot (RAG on Docs)
-Goal:
-Build a chatbot that:
+# 😎 ChaiDocs Web Query Assistant 
 
-Ingests documentation from an existing site (e.g., ReactJS docs, internal cohort site).
+An AI-powered browser extension that allows users to query the ChaiDocs website contextually. It integrates a FastAPI backend, Google embeddings, OpenAI ChatBot and Qdrant vector database to return section-wise answers from documentation. Designed for developers, learners, and contributors to quickly fetch relevant content from ChaiDocs without leaving the webpage.
 
-Answers questions like "How to use useState?" or "Where is routing discussed?".
+---
 
-Optionally provides a navigation link to the correct doc page.
+## 🚀 Features
 
-🧠 Flow Overview:
-Scrape/Parse Docs Website:
+* 🔍 Ask natural language questions about ChaiDocs
+* 🔗 Get contextual answers with section/subsection and documentation links
+* 🤖 Animated bot experience with interactive UI
+* 🌈 Responsive design with Bootstrap
+* 💬 Retains chat history within session
+* 🎯 Loads only on relevant ChaiDocs domain pages
 
-Use tools like BeautifulSoup or Selenium (for dynamic content).
+---
 
-Store content per section/page.
+## 🧱 Tech Stack
 
-Chunk + Embed Page Content
+### Frontend (Browser Extension)
 
-One vector per section or paragraph.
+* Manifest v3 Chrome/Edge Extension
+* HTML, CSS (Bootstrap 5)
+* JavaScript
 
-Store in Qdrant (or any Vector DB)
+### Backend
 
-User Query Input → Embed → Vector Search
+* Python 3
+* FastAPI
+* BeautifulSoup (For Web scrapping doc links)
+* Qdrant (Docker for locally running)
+* GoogleGenAI Embeddings
+* OpenAI SDK via Gemini-Flash (For resolving query)
+* Langchain for parsing and chunking
 
-Search Results
+---
 
-Get top K relevant chunks.
+## 📦 Project Structure
 
-Use the link (scraped) + content to:
-
-Answer the question.
-
-Provide URL to relevant section/page.
-
-Send to OpenAI GPT for final answer.
-
-🔧 Tech Stack
-Web Scraping: requests, BeautifulSoup4, Selenium
-
-Chunking & Embedding: langchain, openai
-
-Vector DB: Qdrant
-
-Frontend: Streamlit or simple chatbot UI
-
-LLM: OpenAI
-
-🔥 Additional Features You Can Add:
-Citation links in the response (like "Answer sourced from useState docs")
-
-Highlighting matched chunks
-
-Toggle: "Show source chunks"
-
-🧪 Suggested Demo Structure:
-📂 PDF QA Demo
-Upload PDF
-
-Ask: "What are the main points from Chapter 2?"
-
-Result: Summary/Answer from PDF
-
-🌐 Docs Chatbot Demo
-Ask: "How to use useState in React?"
-
-Output: Explanation + Link to doc section
-
-
-
-## project structure
-
-chaidocs-helper/
-├── backend/                      # FastAPI + RAG API backend
-│   ├── app.py                    # Main FastAPI app
-│   ├── embeddings.py             # OpenAI embedding logic
-│   ├── vector_store.py           # Qdrant setup + search
-│   ├── scraper.py                # For scraping ChaiDocs
-│   ├── qdrant_config.env         # Store API key, host, etc.
+```
+WebQuery_RAG/
+├── backend/                  # FastAPI backend
+│   ├── chat.py               # Core API logic and Query Processing
+|   ├── docker-compose.yml    # For locally running QdrantDB       
+│   ├── indexing.py           # Query processor (embedding + Qdrant)
+|   ├── list_urls.py          # Fetching all urls from chaidocs
+│   ├── .env                  # Environment variables
 │   └── requirements.txt
-│
-├── extension/                    # Chrome extension files
-│   ├── manifest.json
-│   ├── content.js                # Injects chatbot into docs site
-│   ├── popup.html                # Optional popup UI
+├── extension/                # Chrome Extension
+│   ├── popup.html
 │   ├── popup.js
-│   └── styles.css
-│
-├── .env                          # For FastAPI secrets
+│   ├── styles.css
+│   ├── content.js
+│   ├── injectIcon.js
+│   ├── injectIcon.css
+│   ├── assets/               # Bot icons and images
+│   └── manifest.json
+├── .gitignore
+├── requirements.txt
 └── README.md
+```
+
+---
+
+## 🔧 Setup Instructions (Local Setup)
+Follow these steps to set up and run the WebQuery project locally:
+
+📁 1. Clone the Repository
+```bash
+
+git clone https://github.com/sbndAbhijeet/WebQuery_RAG.git
+cd WebQuery_RAG
+```
+### ⚙️ 2. Start the FastAPI Backend
+
+Navigate to the backend folder:
+
+```bash
+
+cd backend
+```
+Run the FastAPI server:
+```bash
+python chat.py
+Make sure your Python environment is activated and required packages are installed (pip install -r requirements.txt).
+```
+### 🐳 3. Start Qdrant with Docker
+In a new terminal window (while backend is still running):
+
+```bash
+
+docker compose up
+✅ Ensure Docker Desktop is installed and running before this step.
+```
+### 🌐 4. View the Full HTML Demo
+
+If you're testing the UI separately (outside the extension), right-click the index.html file and choose:
+
+- "Open with Live Server" (VS Code extension recommended)
+
+
+### 🧩 5. Load the Chrome Extension
+Go to chrome://extensions
+
+- Enable Developer Mode (top right)
+
+- Click "Load Unpacked"
+
+- Select the extension/ folder inside your project
+
+The ChaiDocs Assistant icon will now appear in your toolbar
+
+### 🚀 6. Use the Extension on ChaiDocs
+Now, navigate to:
+👉 https://docs.chaicode.com
+
+You’ll see the assistant icon appear. Click it and start asking your queries directly on the docs page!
+
+
+## ✨ Example Query Flow
+
+1. Navigate to `https://docs.chaicode.com`
+2. Click on the extension icon (bottom corner or popup)
+3. Ask a question like:
+
+   > "How do I use Tailwind CSS in Django?"
+
+   > " How create a express app?"
+4. You'll receive a detailed answer, code snippet (if any), and a link to the section.
+
+---
+
+## 🧠 Behind the Scenes
+
+* **Langchain** handles document parsing & chunking
+* **GoogleGenAI Embeddings** generate vector representation
+* **Qdrant** indexes and searches relevant chunks
+* **FastAPI** handles user queries and returns structured JSON
+* **Chrome Extension** renders the response with UI animations
+
+---
+
+## 📎 License
+
+MIT License @ Abhijeet
+
+---
