@@ -68,18 +68,18 @@ WebQuery_RAG/
 
 ## 🔧 Setup Instructions (Local Setup)
 Follow these steps to set up and run the WebQuery project locally:
-Summarize steps:
-Make sure you have docker installed.
-clone the repo.
-configure the .env with openai/gemini api keys in backend directory.
-run `python indexing.py`
-open any browser go to extensions and load the `extension` dir.
+* Summarize steps:
+1. Make sure you have docker installed.
+2. clone the repo.
+3. configure the .env with openai/gemini api keys in backend directory.
+4. run `python indexing.py`
+5. open any browser go to extensions and load the `extension` dir.
 
-Now your setup is done, the below ones are for running application
-run `python chat.py`
-in parallel run docker compose up (spinning up the docker to run qdrant db)
+* Now your setup is done, the below ones are for running application
+7. run `python chat.py`
+8. in parallel run docker compose up (spinning up the docker to run qdrant db)
 
-then after go to chai_docs web site https://docs.chaicode.com/youtube/getting-started/ 
+9. Then after go to chai_docs web site https://docs.chaicode.com/youtube/getting-started/ 
 you will start notice a icon at bottom right.
 
 📁 1. Clone the Repository
